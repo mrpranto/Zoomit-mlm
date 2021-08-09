@@ -26,29 +26,7 @@ Route::group(['middleware' => 'auth'], function (Router $router){
 
     include __DIR__.'/auth_routes.php';
     include __DIR__.'/profile_routes.php';
-    include __DIR__.'/product.php';
-    include __DIR__.'/customer.php';
-    include __DIR__.'/quotation.php';
 
     $router->resource('setting', SettingController::class);
 
-    $router->get('delivery_chalan', function (){
-       return __t('delivery_chalan');
-    });
-
-    $router->get('invoice', function (){
-       return __t('invoice');
-    });
-
-    $router->get('inventory', function (){
-       return __t('inventory');
-    });
-
-    $router->get('stock', function (){
-       return __t('stock');
-    });
-
-    $router->get('accounts', function (){
-       return __t('accounts');
-    });
 });
