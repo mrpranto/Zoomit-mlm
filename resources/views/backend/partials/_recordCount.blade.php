@@ -1,0 +1,1 @@
+<small style="font-size: 11px;">{{ __t('total') }} <b>{{ $data->total() }}</b> {{ __t('record_found') }}, &nbsp;&nbsp; {{ __t('page') }} <b>{{ request('page') ?? 1 }}</b> {{ __t('of') }} <b>{{ $data->lastPage() }}</b>, &nbsp;&nbsp; {{ __t('per_page') }} <b>{{ $data->perPage() }}</b></small>
