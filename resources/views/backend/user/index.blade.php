@@ -12,11 +12,11 @@
 
     @can('app.user.create')
 
-        <a class="dropdown-item"
-           data-toggle="modal"
-           data-target="#bs-example-modal-lg">
-            <i class="fa fa-plus"></i> {{ __t('add_new') }}
-        </a>
+        {{--        <a class="dropdown-item"--}}
+        {{--           data-toggle="modal"--}}
+        {{--           data-target="#bs-example-modal-lg">--}}
+        {{--            <i class="fa fa-plus"></i> {{ __t('add_new') }}--}}
+        {{--        </a>--}}
 
     @endcan
 
@@ -37,101 +37,71 @@
 
         <div class="col-12 col-sm-12">
             @include('backend.partials._table_filter')
-        </div>
 
-        @foreach($users as $key => $user)
-
-            <div class="col-12 col-sm-12 col-md-3">
-                <div class="text-center card-box">
-
-                    @if (auth()->user()->role->slug == "admin")
-                        <div class="dropdown float-right">
-                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="mdi mdi-dots-vertical"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" style="">
-                                @can('app.user.edit')
-                                    <a  data-toggle="modal"
-                                        data-target="#bs-example-modal-lg{{ $user->id }}" class="dropdown-item"><i
-                                            class="fas fa-pencil-alt"></i> {{ __t('edit') }}</a>
-                                @endcan
-                                @can('app.user.delete')
-                                    @if ($user->id != 1)
-                                        <a href="#" onclick="checkDelete({{ $user->id }})" class="dropdown-item">
-                                            <i class="fas fa-trash-alt"></i> {{ __t('delete') }}</a>
-                                        <form method="post" action="{{ route('users.destroy', $user->id) }}"
-                                              id="delete_{{ $user->id }}" style="display: none">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+            <div class="card-box">
+                <table class="tablesaw table">
+                    <thead>
+                    <tr>
+                        <th>SL</th>
+                        <th>User Id</th>
+                        <th>Sponsor Name</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Pay status</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($users as $key => $user)
+                        <tr>
+                            <td>{{ ($users->firstItem()+$key) }}</td>
+                            <td>{{ $user->user_generated_id }}</td>
+                            <td>@if($user->sponsor){{ optional($user->sponsor)->phone }}
+                                <small>({{ optional($user->sponsor)->name }})</small>@endif</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td>
+                                @if($user->status == true)
+                                    <span class="badge badge-success">Active</span>
+                                @else
+                                    <span class="badge badge-danger">In-Active</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($user->role->slug === 'user')
+                                    @if($user->payment && $user->payment->sum('amount') >= 1000)
+                                        <span class="badge badge-success">Paid</span>
+                                    @else
+                                        <span class="badge badge-danger">Due</span>
                                     @endif
-                                @endcan
-                            </div>
-                        </div>
-                    @endif
-
-
-                    <div class="pt-2 pb-2">
-
-                        <a href="{{ route('profile') }}?user={{ $user->id }}&tabs=personal_info">
-                            @if (optional($user->profilePicture)->path)
-                                <img src="{{ optional($user->profilePicture)->full_url }}" class="rounded-circle img-thumbnail avatar-xl"
-                                     alt="{{ $user->name }}">
-                            @else
-                                <img src="../assets/images/users/user-3.jpg" class="rounded-circle img-thumbnail avatar-xl"
-                                     alt="profile-image">
-                            @endif
-                        </a>
-
-                        <h4 class="mt-3"><a href="{{ route('profile') }}?user={{ $user->id }}&tabs=personal_info" class="text-dark">{{ $user->name }}</a></h4>
-                        <p class="text-muted">
-                            <span>{{ '@'.$user->role->name }}</span>
-                            <br>
-                            <span>{{ __t('employee_id') }}: {{ $user->employee_id }}</span>
-                            <br>
-                            <span> <a href="mailto:{{ $user->email }}" class="text-muted">{{ $user->email }}</a> </span>
-                            <br>
-                            <span>{{ __t('phone') }}: {{ $user->phone }} </span>
-                            <br>
-                            <span>{{ __t('dob') }}: {{ date($date_format, strtotime($user->date_of_birth)) }}</span>
-                        </p>
-
-                        @php
-                            $social_links = resolve(\App\Repository\CustomInfoRepository::class)->formatInformation($user->socialLinks);
-                            $facebook = array_key_exists('facebook', $social_links) ? $social_links['facebook'] : '';
-                            $google = array_key_exists('google', $social_links) ? $social_links['google'] : '';
-                            $github = array_key_exists('github', $social_links) ? $social_links['github'] : '';
-                            $twitter = array_key_exists('twitter', $social_links) ? $social_links['twitter'] : '';
-                            $linkedin = array_key_exists('linkedin', $social_links) ? $social_links['linkedin'] : '';
-                            $instagram = array_key_exists('instagram', $social_links) ? $social_links['instagram'] : '';
-                        @endphp
-
-
-                        <a href="{{ $facebook }}" target="_blank" class="btn btn-primary btn-xs waves-effect waves-light"><i class="fe-facebook"></i></a>
-                        <a href="{{ $google }}" target="_blank" class="btn btn-danger btn-xs waves-effect"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="{{ $github }}" target="_blank" class="btn btn-dark btn-xs waves-effect"><i class="fe-github"></i></a>
-                        <a href="{{ $twitter }}" target="_blank" class="btn btn-info btn-xs waves-effect"><i class="fe-twitter"></i></a>
-                        <a href="{{ $linkedin }}" target="_blank" class="btn btn-blue btn-xs waves-effect"><i class="fe-linkedin"></i></a>
-                        <a href="{{ $instagram }}" target="_blank" class="btn btn-soft-danger btn-xs waves-effect"><i class="fe-instagram"></i></a>
-
-                    </div>
-                </div>
+                                @endif
+                            </td>
+                            <td>
+                                @if($user->status == true)
+                                    @can('app.user.in_active')
+                                        <a href="{{ route('users.change-status', $user->id) }}?status=false"
+                                           class="action-icon" title="In-Active User"><i
+                                                class="fe-x-square"></i></a>
+                                    @endcan
+                                @else
+                                    @can('app.user.active')
+                                        <a href="{{ route('users.change-status', $user->id) }}?status=true"
+                                           class="action-icon" title="Active User"><i
+                                                class="fe-check-square"></i></a>
+                                    @endcan
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
-
-            @include('backend.user._edit',['user' => $user])
-
-        @endforeach
+        </div>
     </div>
 
     @include('backend.partials._paginate', ['data' => $users])
 
-
-    @can('app.user.create')
-
-        @include('backend.user._create', ['user' => []])
-
-    @endcan
 
 @endsection
 

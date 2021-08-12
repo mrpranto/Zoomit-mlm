@@ -33,6 +33,12 @@ class SidebarComposer
                     'permission' => auth()->user()->can('app.user.index')
                 ],
                 [
+                    'name' => 'Set Commission',
+                    'icon' => 'fe-percent',
+                    'url' => route('set.commission'),
+                    'permission' => auth()->user()->can('app.user.index')
+                ],
+                [
                     'name' => __t('roles'),
                     'icon' => 'fe-aperture',
                     'url' => route('roles.index'),

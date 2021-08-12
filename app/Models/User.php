@@ -28,12 +28,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'role_id',
+        'sponsor_user_id',
         'name',
+        'user_generated_id',
         'email',
-        'employee_id',
         'phone',
-        'date_of_birth',
         'password',
+        'address',
+        'terms_and_condition',
+        'status',
     ];
 
     /**
@@ -70,26 +73,6 @@ class User extends Authenticatable
         return $this->role->permissions();
     }
 
-    public function roleGroupPermissions()
-    {
-        return $this->role->groups()->select('name', 'id');
-    }
-
-    public function roleCompanyPermissions()
-    {
-        return $this->role->companies()->select('name', 'id');
-    }
-
-    public function roleDepartmentPermissions()
-    {
-        return $this->role->departments()->select('name', 'id');
-    }
-
-    public function roleDesignationPermissions()
-    {
-        return $this->role->designations()->select('name', 'id');
-    }
-
     public function profilePicture(): MorphOne
     {
         return $this->morphOne(File::class, 'fileable')
@@ -101,4 +84,31 @@ class User extends Authenticatable
         return $this->morphMany(CustomInfo::class, 'customable')
             ->where('type', 'social_links');
     }
+
+    public function sponsor()
+    {
+        return $this->belongsTo(User::class, 'sponsor_user_id', 'id');
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'sponsor_user_id', 'id');
+    }
+
+    public function walletIncome()
+    {
+        return $this->hasMany(Wallet::class)->where('type', 'income');
+    }
+
+    public function walletWithdraw()
+    {
+        return $this->hasMany(Wallet::class)->where('type', 'withdraw');
+    }
+
+    public function payment()
+    {
+        return $this->hasMany(Wallet::class)
+            ->where('type', 'registration_fee');
+    }
+
 }

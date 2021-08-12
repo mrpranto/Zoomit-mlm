@@ -9,6 +9,7 @@ Route::group([], function (Router $router){
 
     $router->resource('roles', RoleController::class);
     $router->resource('users', UserController::class);
+    $router->get('users/{user}/change-status', [UserController::class, 'changeStatus'])->name('users.change-status');
 
 });
 

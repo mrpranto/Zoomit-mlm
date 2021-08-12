@@ -92,4 +92,21 @@ class UserController extends Controller
 
     }
 
+    public function changeStatus(Request $request, User $user)
+    {
+        if ($request->status == "false")
+        {
+            $user->update(['status' => false]);
+
+            return redirect()->back()->with('success', 'User in-active successful');
+        }
+        elseif ($request->status == "true")
+        {
+            $user->update(['status' => true]);
+
+            return redirect()->back()->with('success', 'User active successful');
+        }
+
+    }
+
 }

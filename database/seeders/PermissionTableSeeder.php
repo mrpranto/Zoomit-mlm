@@ -76,6 +76,16 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'User Delete',
                 'slug' => 'app.user.delete'
             ],
+            [
+                'module_id' => $this->module('User Management'),
+                'name' => 'User Active',
+                'slug' => 'app.user.active'
+            ],
+            [
+                'module_id' => $this->module('User Management'),
+                'name' => 'User In-active',
+                'slug' => 'app.user.in_active'
+            ],
 
 
 
@@ -106,175 +116,6 @@ class PermissionTableSeeder extends Seeder
                 'module_id' => $this->module('Profile'),
                 'name' => 'Social Link Update',
                 'slug' => 'app.social.link'
-            ],
-
-
-
-            [
-                'module_id' => $this->module('Category'),
-                'name' => 'Access Category',
-                'slug' => 'app.category.index'
-            ],
-            [
-                'module_id' => $this->module('Category'),
-                'name' => 'Category Create',
-                'slug' => 'app.category.create'
-            ],
-            [
-                'module_id' => $this->module('Category'),
-                'name' => 'Category Edit',
-                'slug' => 'app.category.edit'
-            ],
-            [
-                'module_id' => $this->module('Category'),
-                'name' => 'Category Delete',
-                'slug' => 'app.category.delete'
-            ],
-            [
-                'module_id' => $this->module('Category'),
-                'name' => 'Category Export',
-                'slug' => 'app.category.export'
-            ],
-
-            [
-                'module_id' => $this->module('Product'),
-                'name' => 'Access Product',
-                'slug' => 'app.product.index'
-            ],
-            [
-                'module_id' => $this->module('Product'),
-                'name' => 'Product Create',
-                'slug' => 'app.product.create'
-            ],
-            [
-                'module_id' => $this->module('Product'),
-                'name' => 'Product Edit',
-                'slug' => 'app.product.edit'
-            ],
-            [
-                'module_id' => $this->module('Product'),
-                'name' => 'Product Delete',
-                'slug' => 'app.product.delete'
-            ],
-            [
-                'module_id' => $this->module('Product'),
-                'name' => 'Product Upload',
-                'slug' => 'app.product.upload'
-            ],
-            [
-                'module_id' => $this->module('Product'),
-                'name' => 'Product Export',
-                'slug' => 'app.product.export'
-            ],
-
-
-            [
-                'module_id' => $this->module('Company'),
-                'name' => 'Access Company',
-                'slug' => 'app.company.index'
-            ],
-            [
-                'module_id' => $this->module('Company'),
-                'name' => 'Company Create',
-                'slug' => 'app.company.create'
-            ],
-            [
-                'module_id' => $this->module('Company'),
-                'name' => 'Company Edit',
-                'slug' => 'app.company.edit'
-            ],
-            [
-                'module_id' => $this->module('Company'),
-                'name' => 'Company Delete',
-                'slug' => 'app.company.delete'
-            ],
-
-
-            [
-                'module_id' => $this->module('Customer'),
-                'name' => 'Access Customer',
-                'slug' => 'app.customer.index'
-            ],
-            [
-                'module_id' => $this->module('Customer'),
-                'name' => 'Customer Create',
-                'slug' => 'app.customer.create'
-            ],
-            [
-                'module_id' => $this->module('Customer'),
-                'name' => 'Customer Edit',
-                'slug' => 'app.customer.edit'
-            ],
-            [
-                'module_id' => $this->module('Customer'),
-                'name' => 'Customer Delete',
-                'slug' => 'app.customer.delete'
-            ],
-
-
-            [
-                'module_id' => $this->module('Quotation Type'),
-                'name' => 'Access Quotation Type',
-                'slug' => 'app.quotation_type.index'
-            ],
-            [
-                'module_id' => $this->module('Quotation Type'),
-                'name' => 'Quotation Type Create',
-                'slug' => 'app.quotation_type.create'
-            ],
-            [
-                'module_id' => $this->module('Quotation Type'),
-                'name' => 'Quotation Type Edit',
-                'slug' => 'app.quotation_type.edit'
-            ],
-            [
-                'module_id' => $this->module('Quotation Type'),
-                'name' => 'Quotation Type Delete',
-                'slug' => 'app.quotation_type.delete'
-            ],
-
-
-            [
-                'module_id' => $this->module('Quotation'),
-                'name' => 'Access Quotation',
-                'slug' => 'app.quotation.index'
-            ],
-            [
-                'module_id' => $this->module('Quotation'),
-                'name' => 'Quotation Create',
-                'slug' => 'app.quotation.create'
-            ],
-            [
-                'module_id' => $this->module('Quotation'),
-                'name' => 'Quotation Edit',
-                'slug' => 'app.quotation.edit'
-            ],
-            [
-                'module_id' => $this->module('Quotation'),
-                'name' => 'Quotation Delete',
-                'slug' => 'app.quotation.delete'
-            ],
-            [
-                'module_id' => $this->module('Quotation'),
-                'name' => 'Po Confirm',
-                'slug' => 'app.quotation.po-confirm'
-            ],
-            [
-                'module_id' => $this->module('Quotation'),
-                'name' => 'Cancel Po Confirm',
-                'slug' => 'app.quotation.cancel-po-confirm'
-            ],
-
-
-            [
-                'module_id' => $this->module('P/O'),
-                'name' => 'Access P/O',
-                'slug' => 'app.po.index'
-            ],
-            [
-                'module_id' => $this->module('P/O'),
-                'name' => 'P/O Cancel',
-                'slug' => 'app.po.cancel'
             ],
 
 

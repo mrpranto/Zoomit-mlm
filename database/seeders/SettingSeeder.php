@@ -15,12 +15,12 @@ class SettingSeeder extends Seeder
     public function run()
     {
         $settings = [
-          'app_name' => 'Quotation',
+          'app_name' => 'MLM',
           'app_logo' => 'default.png',
           'app_icon' => 'default.png',
           'date_format' => 'Y-m-d',
           'time_format' => '12',
-          'currency_symbol' => '$',
+          'currency_symbol' => '৳',
           'pagination' => '15',
         ];
 

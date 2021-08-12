@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\CommissionSetController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +23,15 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('user-registration', [RegisterController::class, 'registerPage'])
+    ->name('user-registration.page');
+
+Route::post('user-registration', [RegisterController::class, 'processedRegister'])
+    ->name('processed.register');
+
+Route::post('user-login', [RegisterController::class, 'processedLogin'])
+    ->name('processed.login');
+
 Route::group(['middleware' => 'auth'], function (Router $router){
 
     $router->get('/home', [HomeController::class, 'index'])->name('home');
@@ -28,5 +40,13 @@ Route::group(['middleware' => 'auth'], function (Router $router){
     include __DIR__.'/profile_routes.php';
 
     $router->resource('setting', SettingController::class);
+
+//    $router->get('commission-set', [CommissionSetController::class, 'commissionPage'])->name('commission.page');
+//    $router->post('commission-set-list', [CommissionSetController::class, 'storeCommission'])->name('commission.store');
+
+
+    $router->get('commission', [CommissionController::class, 'setCommission'])->name('set.commission');
+    $router->post('commission', [CommissionController::class, 'storeCommission'])->name('store.commission');
+
 
 });

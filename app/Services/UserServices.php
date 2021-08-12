@@ -30,7 +30,7 @@ class UserServices extends BaseServices
             'date_format' => app_settings()['date_format'],
             'users' => $this->model::query()
                 ->filters($this->filter)
-                ->with(['role', 'profilePicture', 'socialLinks'])
+                ->with(['role', 'profilePicture', 'sponsor', 'payment'])
                 ->paginate(
                     request('per_page') ?: app_settings()['pagination']
                 )

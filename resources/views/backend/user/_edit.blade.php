@@ -87,22 +87,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="dob_{{$user->id}}"
-                               class="col-md-2 col-form-label text-md-right">{{ __t('dob') }}</label>
-
-                        <div class="col-md-9">
-                            <input id="dob_{{$user->id}}" type="date"
-                                   class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth"
-                                   value="{{ old('date_of_birth') ?: $user->date_of_birth }}" autocomplete="off">
-
-                            @error('date_of_birth')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
-                    </div>
 
                     <div class="form-group row">
                         <label for="images_{{$user->id}}"
