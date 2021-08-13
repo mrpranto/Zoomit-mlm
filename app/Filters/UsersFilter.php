@@ -13,8 +13,7 @@ class UsersFilter extends FilterBuilder
         return $this->builder->when($search, function (Builder $builder) use ($search){
             $builder->where('name','Like', '%'.$search.'%')
                 ->orWhere('email','Like', '%'.$search.'%')
-                ->orWhere('phone','Like', '%'.$search.'%')
-                ->orWhere('employee_id','Like', '%'.$search.'%');
+                ->orWhere('phone','Like', '%'.$search.'%');
         });
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Repository\SettingRepository;
 use App\Services\UserServices;
 use App\Services\DistributeCommissionServices;
 use Illuminate\Http\RedirectResponse;
@@ -99,18 +98,16 @@ class UserController extends Controller
     public function changeStatus(Request $request, User $user)
     {
         if ($request->status == "false") {
+
             $user->update(['status' => false]);
-
             return redirect()->back()->with('success', 'User in-active successful');
+
         } elseif ($request->status == "true") {
-//            $user->update(['status' => true]);
 
-            $parentIds = $this->distribute
-                ->distributeCommission($user);
+            $user->update(['status' => true]);
+            $this->distribute->distributeCommission($user);
 
-            dd($parentIds);
-
-//            return redirect()->back()->with('success', 'User active successful');
+            return redirect()->back()->with('success', 'User active successful');
         }
 
     }

@@ -2,18 +2,40 @@
 
 namespace App\Services;
 
+use App\Models\Commission;
 use App\Models\User;
+use App\Models\Wallet;
 
 class DistributeCommissionServices extends BaseServices
 {
+    public $user;
+
     public function __construct(User $user)
     {
         $this->model = $user;
+        $this->user = $user;
     }
 
     public function distributeCommission($user)
     {
-        return $this->parentIds($user);
+        foreach ($this->parentIds($user) as $key => $id){
+            $this->setCommission($this->getCommission()[$key], $id);
+        }
+    }
+
+    public function setCommission(array $commission, $payableUser)
+    {
+        Wallet::query()->create([
+            'user_id' => $payableUser,
+            'payment_type_id' => null,
+            'amount' => $commission['commission'],
+            'type' => 'income',
+        ]);
+    }
+
+    public function getCommission()
+    {
+        return Commission::query()->get()->toArray();
     }
 
     public function parentIds($user)
@@ -65,6 +87,17 @@ class DistributeCommissionServices extends BaseServices
 
                                                 array_push($levelUserIds, $hisParent9->id);
                                                 $hisParent10 = User::query()->where('id', $hisParent9->sponsor_user_id)->first();
+
+                                                if ($hisParent10){
+                                                    array_push($levelUserIds, $hisParent10->id);
+                                                    $hisParent11 = User::query()->where('id', $hisParent10->sponsor_user_id)->first();
+
+                                                    if ($hisParent11){
+                                                        array_push($levelUserIds, $hisParent11->id);
+                                                        $hisParent12 = User::query()->where('id', $hisParent11->sponsor_user_id)->first();
+
+                                                    }
+                                                }
                                             }
 
                                         }
@@ -78,6 +111,78 @@ class DistributeCommissionServices extends BaseServices
             }
         }
 
+        array_pop($levelUserIds);
         return array_reverse($levelUserIds);
+    }
+
+
+    public function levelOneMember()
+    {
+        return $this->user->newQuery()
+            ->where('sponsor_user_id', $this->user->newQuery()->first()->id)
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelTwoMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelOneMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelThreeMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelTwoMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelFourMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelThreeMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelFiveMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelFourMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelSixMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelFiveMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelSevenMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelSixMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelEightMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelSevenMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelNineMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelEightMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
+    }
+
+    public function levelTenMember()
+    {
+        return $this->user->newQuery()
+            ->whereIn('sponsor_user_id', $this->levelNineMember()->pluck('id'))
+            ->get(['id', 'name', 'phone']);
     }
 }

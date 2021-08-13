@@ -48,6 +48,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Status</th>
+                        <th>Balance</th>
                         <th>Pay status</th>
                         <th></th>
                     </tr>
@@ -70,6 +71,13 @@
                             </td>
                             <td>
                                 @if($user->role->slug === 'user')
+                                    {{ currency(optional($user->walletIncome)->sum('amount')) }}
+                                @elseif($user->role->slug === 'admin')
+                                    {{ currency(($total_registration_fee - $total_income)) }}
+                                @endif
+                            </td>
+                            <td>
+                                @if($user->role->slug === 'user')
                                     @if($user->payment && $user->payment->sum('amount') >= 1000)
                                         <span class="badge badge-success">Paid</span>
                                     @else
@@ -78,18 +86,20 @@
                                 @endif
                             </td>
                             <td>
-                                @if($user->status == true)
-                                    @can('app.user.in_active')
-                                        <a href="{{ route('users.change-status', $user->id) }}?status=false"
-                                           class="action-icon" title="In-Active User"><i
-                                                class="fe-x-square"></i></a>
-                                    @endcan
-                                @else
-                                    @can('app.user.active')
-                                        <a href="{{ route('users.change-status', $user->id) }}?status=true"
-                                           class="action-icon" title="Active User"><i
-                                                class="fe-check-square"></i></a>
-                                    @endcan
+                                @if($user->role->slug === 'user')
+                                    @if($user->status == true)
+                                        @can('app.user.in_active')
+                                            <a href="{{ route('users.change-status', $user->id) }}?status=false"
+                                               class="action-icon" title="In-Active User"><i
+                                                    class="fe-x-square"></i></a>
+                                        @endcan
+                                    @else
+                                        @can('app.user.active')
+                                            <a href="{{ route('users.change-status', $user->id) }}?status=true"
+                                               class="action-icon" title="Active User"><i
+                                                    class="fe-check-square"></i></a>
+                                        @endcan
+                                    @endif
                                 @endif
                             </td>
                         </tr>

@@ -8,6 +8,7 @@ use App\Filters\UsersFilter;
 use App\HelperTrait\FileHandler;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Wallet;
 use App\Notifications\UserRegistration;
 use App\Notifications\UserUpdate;
 use Illuminate\Support\Facades\Hash;
@@ -28,6 +29,8 @@ class UserServices extends BaseServices
     {
         return [
             'date_format' => app_settings()['date_format'],
+            'total_registration_fee' => Wallet::query()->where('type', 'registration_fee')->sum('amount'),
+            'total_income' => Wallet::query()->where('type', 'income')->sum('amount'),
             'users' => $this->model::query()
                 ->filters($this->filter)
                 ->with(['role', 'profilePicture', 'sponsor', 'payment'])
