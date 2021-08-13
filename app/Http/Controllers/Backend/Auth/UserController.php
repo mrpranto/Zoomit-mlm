@@ -6,15 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repository\SettingRepository;
 use App\Services\UserServices;
+use App\Services\DistributeCommissionServices;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
-    public function __construct(UserServices $services)
+    public $distribute;
+
+    public function __construct(UserServices $services, DistributeCommissionServices $distribute)
     {
         $this->services = $services;
+        $this->distribute = $distribute;
     }
 
     public function index()
@@ -85,26 +89,28 @@ class UserController extends Controller
 
             return deleted_response(__t('user'));
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
 
-            return deleted_response(__t('user'),'users.index', 'error', $exception->getCode());
+            return deleted_response(__t('user'), 'users.index', 'error', $exception->getCode());
         }
 
     }
 
     public function changeStatus(Request $request, User $user)
     {
-        if ($request->status == "false")
-        {
+        if ($request->status == "false") {
             $user->update(['status' => false]);
 
             return redirect()->back()->with('success', 'User in-active successful');
-        }
-        elseif ($request->status == "true")
-        {
-            $user->update(['status' => true]);
+        } elseif ($request->status == "true") {
+//            $user->update(['status' => true]);
 
-            return redirect()->back()->with('success', 'User active successful');
+            $parentIds = $this->distribute
+                ->distributeCommission($user);
+
+            dd($parentIds);
+
+//            return redirect()->back()->with('success', 'User active successful');
         }
 
     }
