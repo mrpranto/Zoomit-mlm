@@ -48,13 +48,13 @@
                             <div class="auth-logo">
                                 <a href="{{ url('/') }}" class="logo logo-dark text-center">
                                     <span class="logo-lg">
-                                        <img src="{{ app_settings()['app_logo'] ?: asset('/assets/images/logo-dark.png') }}" alt="" height="22">
+                                        <img src="{{ app_settings()['app_logo'] ?: asset('/assets/images/logo-dark.png') }}" alt="" height="40">
                                     </span>
                                 </a>
 
                                 <a href="{{ url('/') }}" class="logo logo-light text-center">
                                     <span class="logo-lg">
-                                        <img src="{{ app_settings()['app_logo'] ?: asset('/assets/images/logo-light.png') }}" alt="" height="22">
+                                        <img src="{{ app_settings()['app_logo'] ?: asset('/assets/images/logo-light.png') }}" alt="" height="40">
                                     </span>
                                 </a>
                             </div>

@@ -44,14 +44,14 @@ class RegisterController extends Controller
     private function validateUser($request): RegisterController
     {
         $request->validate([
-            'sponsor_number' => 'nullable|numeric|exists:users,phone',
+            'sponsor_number' => 'required|numeric|exists:users,phone',
             'name' => 'required|string',
             'phone_number' => 'required|numeric|unique:users,phone',
             'email' => 'nullable|email|unique:users,email',
             'address' => 'nullable|string',
             'payment_type' => 'required|exists:payment_types,id',
             'payment_amount' => 'required|numeric|min:1000',
-            'password' => ['required', 'string', new Password, 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
             'password_confirmation' => 'required',
             'terms_and_condition' => 'required|numeric',
         ]);

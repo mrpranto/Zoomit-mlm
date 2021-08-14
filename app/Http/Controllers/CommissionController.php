@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Commission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CommissionController extends Controller
 {
@@ -16,6 +17,8 @@ class CommissionController extends Controller
 
     public function setCommission()
     {
+        Gate::authorize('app.commission.index');
+
         return view('backend.commission.create', [
             'commissions' => $this->commission->newQuery()->get()
         ]);
@@ -23,6 +26,8 @@ class CommissionController extends Controller
 
     public function storeCommission(Request $request)
     {
+        Gate::authorize('app.commission.update');
+
         $request->validate([
             'level_minimum_member.*' => 'required|numeric',
             'commission_amount.*' => 'required|numeric',

@@ -171,7 +171,7 @@
                                 <!-- <span class="logo-lg-text-light">UBold</span> -->
                             </span>
                 <span class="logo-lg">
-                                <img src="{{ asset(app_settings()['app_logo']) }}" alt="" height="20">
+                                <img src="{{ asset(app_settings()['app_logo']) }}" alt="" height="40">
                     <!-- <span class="logo-lg-text-light">U</span> -->
                             </span>
             </a>
@@ -181,7 +181,7 @@
                                 <img src="{{ asset(app_settings()['app_icon']) }}" alt="" height="22">
                             </span>
                 <span class="logo-lg">
-                                <img src="{{ asset(app_settings()['app_logo']) }}" alt="" height="20">
+                                <img src="{{ asset(app_settings()['app_logo']) }}" alt="" height="40">
                             </span>
             </a>
         </div>

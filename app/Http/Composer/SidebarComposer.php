@@ -27,16 +27,28 @@ class SidebarComposer
                     'permission' => auth()->user()->can('app.dashboard')
                 ],
                 [
-                    'name' => __t('users'),
+                    'name' => 'Members',
                     'icon' => 'fe-user-check',
                     'url' => route('users.index'),
                     'permission' => auth()->user()->can('app.user.index')
                 ],
                 [
+                    'name' => 'Incomes',
+                    'icon' => 'fe-download',
+                    'url' => route('incomes'),
+                    'permission' => auth()->user()->can('app.income.index')
+                ],
+                [
+                    'name' => 'Withdraw',
+                    'icon' => 'fe-upload',
+                    'url' => route('withdraw'),
+                    'permission' => auth()->user()->can('app.withdraw.index')
+                ],
+                [
                     'name' => 'Set Commission',
                     'icon' => 'fe-percent',
                     'url' => route('set.commission'),
-                    'permission' => auth()->user()->can('app.user.index')
+                    'permission' => auth()->user()->can('app.commission.index')
                 ],
                 [
                     'name' => __t('roles'),

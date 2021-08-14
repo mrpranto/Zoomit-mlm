@@ -65,6 +65,18 @@ if (!function_exists('dateTimeFormat')) {
     }
 }
 
+
+if (!function_exists('dateFormat')) {
+
+    function dateFormat($value){
+
+        return date(app_settings()['date_format'], strtotime($value));
+
+    }
+}
+
+
+
 if (!function_exists('sanitize_data')) {
     /**
      * @param $value

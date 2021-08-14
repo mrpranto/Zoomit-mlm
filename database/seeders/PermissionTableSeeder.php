@@ -17,8 +17,7 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
 
-        foreach ($this->permissions() as $key => $permission)
-        {
+        foreach ($this->permissions() as $key => $permission) {
             Permission::query()->updateOrCreate($permission);
         }
 
@@ -55,7 +54,6 @@ class PermissionTableSeeder extends Seeder
             ],
 
 
-
             [
                 'module_id' => $this->module('User Management'),
                 'name' => 'Access User',
@@ -88,7 +86,6 @@ class PermissionTableSeeder extends Seeder
             ],
 
 
-
             [
                 'module_id' => $this->module('Setting'),
                 'name' => 'Access Setting',
@@ -99,7 +96,6 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'Setting Create',
                 'slug' => 'app.setting.create'
             ],
-
 
 
             [
@@ -116,6 +112,28 @@ class PermissionTableSeeder extends Seeder
                 'module_id' => $this->module('Profile'),
                 'name' => 'Social Link Update',
                 'slug' => 'app.social.link'
+            ],
+
+            [
+                'module_id' => $this->module('Set Commission'),
+                'name' => 'Commission Set',
+                'slug' => 'app.commission.index'
+            ],
+            [
+                'module_id' => $this->module('Set Commission'),
+                'name' => 'Commission Change',
+                'slug' => 'app.commission.update'
+            ],
+
+            [
+                'module_id' => $this->module('Wallet'),
+                'name' => 'Income List',
+                'slug' => 'app.income.index'
+            ],
+            [
+                'module_id' => $this->module('Wallet'),
+                'name' => 'Withdraw List',
+                'slug' => 'app.withdraw.index'
             ],
 
 
