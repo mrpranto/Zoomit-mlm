@@ -21,7 +21,7 @@ class WalletController extends Controller
 
         $incomes = $this->model->newQuery();
 
-        if (auth()->user()->role->slug == 'users'){
+        if (auth()->user()->role->slug == 'user'){
             $incomes->where('user_id', auth()->id())->where('type', 'income');
         }else{
             $incomes->where('type', 'registration_fee');
@@ -39,7 +39,7 @@ class WalletController extends Controller
 
         $withdraws = $this->model->newQuery();
 
-        if (auth()->user()->role->slug == 'users'){
+        if (auth()->user()->role->slug == 'user'){
             $withdraws->where('user_id', auth()->id())->where('type', 'withdraw');
         }else{
             $withdraws->where('type', 'withdraw');

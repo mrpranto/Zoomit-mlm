@@ -43,13 +43,24 @@
                         </thead>
                         <tbody>
 
+                        @php
+                            $total = 0;
+                        @endphp
                         @foreach($incomes as $key => $income)
                             <tr>
                                 <td>{{ $incomes->firstItem()+$key }}</td>
                                 <td>{{ dateFormat($income->created_at) }}</td>
                                 <td>{{ currency($income->amount) }}</td>
                             </tr>
+                            @php
+                                $total += $income->amount
+                            @endphp
                         @endforeach
+                        <tr>
+                            <th>Total:</th>
+                            <th></th>
+                            <th>{{ currency($total) }}</th>
+                        </tr>
 
                         </tbody>
                     </table>

@@ -43,13 +43,26 @@
                         </thead>
                         <tbody>
 
+                        @php
+                            $total = 0;
+                        @endphp
                         @foreach($withdraws as $key => $withdraw)
                             <tr>
                                 <td>{{ $withdraws->firstItem()+$key }}</td>
                                 <td>{{ dateFormat($withdraw->created_at) }}</td>
                                 <td>{{ currency($withdraw->amount) }}</td>
                             </tr>
+                            @php
+                                $total += $withdraw->amount;
+                            @endphp
                         @endforeach
+                        <tr>
+                            <th>Total:</th>
+                            <th></th>
+                            <th>{{ currency($total) }}</th>
+                        </tr>
+
+
 
                         </tbody>
                     </table>
