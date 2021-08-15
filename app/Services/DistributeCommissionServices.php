@@ -88,16 +88,16 @@ class DistributeCommissionServices extends BaseServices
                                                 array_push($levelUserIds, $hisParent9->id);
                                                 $hisParent10 = User::query()->where('id', $hisParent9->sponsor_user_id)->first();
 
-                                                if ($hisParent10){
-                                                    array_push($levelUserIds, $hisParent10->id);
-                                                    $hisParent11 = User::query()->where('id', $hisParent10->sponsor_user_id)->first();
-
-                                                    if ($hisParent11){
-                                                        array_push($levelUserIds, $hisParent11->id);
-                                                        $hisParent12 = User::query()->where('id', $hisParent11->sponsor_user_id)->first();
-
-                                                    }
-                                                }
+//                                                if ($hisParent10){
+//                                                    array_push($levelUserIds, $hisParent10->id);
+//                                                    $hisParent11 = User::query()->where('id', $hisParent10->sponsor_user_id)->first();
+//
+//                                                    if ($hisParent11){
+//                                                        array_push($levelUserIds, $hisParent11->id);
+//                                                        $hisParent12 = User::query()->where('id', $hisParent11->sponsor_user_id)->first();
+//
+//                                                    }
+//                                                }
                                             }
 
                                         }
@@ -111,8 +111,7 @@ class DistributeCommissionServices extends BaseServices
             }
         }
 
-        array_pop($levelUserIds);
-        return array_reverse($levelUserIds);
+        return $levelUserIds;
     }
 
 

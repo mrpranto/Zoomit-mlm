@@ -70,11 +70,14 @@
                                 @endif
                             </td>
                             <td>
-                                @if($user->role->slug === 'user')
-                                    {{ currency(optional($user->walletIncome)->sum('amount')) }}
-                                @elseif($user->role->slug === 'admin')
-                                    {{ currency(($total_registration_fee - $total_income)) }}
-                                @endif
+
+                                {{ currency(optional($user->walletIncome)->sum('amount')) }}
+
+{{--                                @if($user->role->slug === 'user')--}}
+{{--                                    {{ currency(optional($user->walletIncome)->sum('amount')) }}--}}
+{{--                                @elseif($user->role->slug === 'admin')--}}
+{{--                                    {{ currency(($total_registration_fee - $total_income)) }}--}}
+{{--                                @endif--}}
                             </td>
                             <td>
                                 @if($user->role->slug === 'user')
