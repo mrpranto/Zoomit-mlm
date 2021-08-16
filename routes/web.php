@@ -49,5 +49,6 @@ Route::group(['middleware' => 'auth'], function (Router $router){
     $router->get('incomes', [WalletController::class, 'incomes'])->name('incomes');
     $router->get('withdraw', [WalletController::class, 'withdraw'])->name('withdraw');
     $router->get('withdraw/create', [WalletController::class, 'withdrawCreate'])->name('withdraw.create');
+    $router->post('withdraw/create', [WalletController::class, 'processWithdraw'])->name('withdraw.process');
 
 });

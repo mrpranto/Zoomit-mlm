@@ -38,6 +38,8 @@
                         <tr>
                             <th>SL</th>
                             <th>Date</th>
+                            <th>Withdraw Type</th>
+                            <th>Withdraw number</th>
                             <th>Withdraw Amount</th>
                         </tr>
                         </thead>
@@ -50,6 +52,8 @@
                             <tr>
                                 <td>{{ $withdraws->firstItem()+$key }}</td>
                                 <td>{{ dateFormat($withdraw->created_at) }}</td>
+                                <td>{{ $withdraw->payment_type->name }}</td>
+                                <td>{{ $withdraw->withdraw_number }}</td>
                                 <td>{{ currency($withdraw->amount) }}</td>
                             </tr>
                             @php
@@ -58,6 +62,8 @@
                         @endforeach
                         <tr>
                             <th>Total:</th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                             <th>{{ currency($total) }}</th>
                         </tr>

@@ -16,5 +16,11 @@ class Wallet extends BaseModel
         'payment_type_id',
         'amount',
         'type',
+        'withdraw_number'
     ];
+
+    public function payment_type()
+    {
+        return $this->belongsTo(PaymentType::class);
+    }
 }
