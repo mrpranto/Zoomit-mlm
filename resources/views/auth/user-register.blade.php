@@ -147,6 +147,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <p>(01815279323 এই পার্সোনাল নাম্বারে বিকাশ করুন)</p>
                             </div>
 
 
