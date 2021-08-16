@@ -71,8 +71,8 @@ class UserController extends Controller
 
         $this->services
             ->validateUser($request, $user)
-            ->updateUser($request, $user)
-            ->sendUpdateNotification($request, $user);
+            ->updateUser($request, $user);
+//            ->sendUpdateNotification($request, $user);
 
         return updated_response(__t('user'), 'users.index');
     }

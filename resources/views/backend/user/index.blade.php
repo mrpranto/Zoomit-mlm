@@ -39,76 +39,82 @@
             @include('backend.partials._table_filter')
 
             <div class="card-box">
-                <table class="tablesaw table">
-                    <thead>
-                    <tr>
-                        <th>SL</th>
-                        <th>User Id</th>
-                        <th>Sponsor Name</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Status</th>
-                        <th>Balance</th>
-                        <th>Pay status</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($users as $key => $user)
+                <div class="table-responsive">
+                    <table class="tablesaw table">
+                        <thead>
                         <tr>
-                            <td>{{ ($users->firstItem()+$key) }}</td>
-                            <td>{{ $user->user_generated_id }}</td>
-                            <td>@if($user->sponsor){{ optional($user->sponsor)->phone }}
-                                <small>({{ optional($user->sponsor)->name }})</small>@endif</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->phone }}</td>
-                            <td>
-                                @if($user->status == true)
-                                    <span class="badge badge-success">Active</span>
-                                @else
-                                    <span class="badge badge-danger">In-Active</span>
-                                @endif
-                            </td>
-                            <td>
-
-                                {{ currency(optional($user->walletIncome)->sum('amount')) }}
-
-{{--                                @if($user->role->slug === 'user')--}}
-{{--                                    {{ currency(optional($user->walletIncome)->sum('amount')) }}--}}
-{{--                                @elseif($user->role->slug === 'admin')--}}
-{{--                                    {{ currency(($total_registration_fee - $total_income)) }}--}}
-{{--                                @endif--}}
-                            </td>
-                            <td>
-                                @if($user->role->slug === 'user')
-                                    @if($user->payment && $user->payment->sum('amount') >= 1000)
-                                        <span class="badge badge-success">Paid</span>
-                                    @else
-                                        <span class="badge badge-danger">Due</span>
-                                    @endif
-                                @endif
-                            </td>
-                            <td>
-                                @if($user->role->slug === 'user')
-                                    @if($user->status == true)
-                                        @can('app.user.in_active')
-                                            <a href="{{ route('users.change-status', $user->id) }}?status=false"
-                                               class="action-icon" title="In-Active User"><i
-                                                    class="fe-x-square"></i></a>
-                                        @endcan
-                                    @else
-                                        @can('app.user.active')
-                                            <a href="{{ route('users.change-status', $user->id) }}?status=true"
-                                               class="action-icon" title="Active User"><i
-                                                    class="fe-check-square"></i></a>
-                                        @endcan
-                                    @endif
-                                @endif
-                            </td>
+                            <th>SL</th>
+                            <th>User Id</th>
+                            <th>Sponsor Name</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Balance</th>
+                            <th>Pay status</th>
+                            <th></th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $key => $user)
+                            <tr>
+                                <td>{{ ($users->firstItem()+$key) }}</td>
+                                <td>{{ $user->user_generated_id }}</td>
+                                <td>@if($user->sponsor){{ optional($user->sponsor)->phone }}
+                                    <small>({{ optional($user->sponsor)->name }})</small>@endif</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>
+                                    @if($user->status == true)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">In-Active</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ currency(optional($user->walletIncome)->sum('amount')) }}
+                                </td>
+                                <td>
+                                    @if($user->role->slug === 'user')
+                                        @if($user->payment && $user->payment->sum('amount') >= 1000)
+                                            <span class="badge badge-success">Paid</span>
+                                        @else
+                                            <span class="badge badge-danger">Due</span>
+                                        @endif
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($user->role->slug === 'user')
+                                        @if($user->status == true)
+                                            @can('app.user.in_active')
+                                                <a href="{{ route('users.change-status', $user->id) }}?status=false"
+                                                   class="action-icon" title="In-Active User"><i
+                                                        class="fe-x-square"></i></a>
+                                            @endcan
+                                        @else
+                                            @can('app.user.active')
+                                                <a href="{{ route('users.change-status', $user->id) }}?status=true"
+                                                   class="action-icon" title="Active User"><i
+                                                        class="fe-check-square"></i></a>
+                                            @endcan
+                                        @endif
+
+                                        @can('app.user.edit')
+                                            <a data-toggle="modal" href="#"
+                                               data-target="#bs-example-modal-lg{{ $user->id }}"
+                                               class="action-icon" title="Edit User"><i
+                                                    class="fe-edit"></i></a>
+                                        @endcan
+
+                                    @endif
+                                </td>
+                            </tr>
+
+                            @include('backend.user._edit',['user' => $user])
+
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

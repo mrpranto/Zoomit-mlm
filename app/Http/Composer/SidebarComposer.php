@@ -33,7 +33,7 @@ class SidebarComposer
                     'permission' => auth()->user()->can('app.user.index')
                 ],
                 [
-                    'name' => 'Incomes',
+                    'name' => 'Income History',
                     'icon' => 'fe-download',
                     'url' => route('incomes'),
                     'permission' => auth()->user()->can('app.income.index')
@@ -41,8 +41,9 @@ class SidebarComposer
                 [
                     'name' => 'Withdraw',
                     'icon' => 'fe-upload',
-                    'url' => route('withdraw'),
-                    'permission' => auth()->user()->can('app.withdraw.index')
+                    'id' => 'withdraw_sub_menu',
+                    'permission' => auth()->user()->canany(['app.withdraw.index']),
+                    'subMenu' => $this->subMenu->withdraw()
                 ],
                 [
                     'name' => 'Set Commission',

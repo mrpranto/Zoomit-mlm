@@ -52,7 +52,7 @@ class UserServices extends BaseServices
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => [
-                'required',
+                'nullable',
                 'string',
                 'email',
                 'max:255',
@@ -68,11 +68,6 @@ class UserServices extends BaseServices
                     ? Rule::unique(User::class)->ignore($user->id)
                     : Rule::unique(User::class)
             ],
-
-            'date_of_birth' => ['nullable', 'date', 'max:255'],
-            'password' => $user ?? ['required', 'min:8'],
-            'role' => ['required', 'exists:roles,id'],
-            'user_image' => ['nullable', 'mimes:jpeg,jpg,png'],
         ]);
 
         return $this;
@@ -99,12 +94,11 @@ class UserServices extends BaseServices
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'role_id' => $request->role,
             'phone' => $request->phone,
-            'date_of_birth' => $request->date_of_birth,
+            'address' => $request->address,
         ]);
 
-        $this->uploadProfilePhoto($request, $user);
+//        $this->uploadProfilePhoto($request, $user);
 
         return $this;
     }

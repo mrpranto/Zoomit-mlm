@@ -63,38 +63,12 @@
                         </div>
                     </div>
 
-
                     <div class="form-group row">
-                        <label for="role_{{$user->id}}"
-                               class="col-md-2 col-form-label text-md-right">{{ __t('role') }}</label>
+                        <label for="address_{{$user->id}}"
+                               class="col-md-2 col-form-label text-md-right">Address</label>
 
                         <div class="col-md-9">
-                            <select class="form-control @error('role') is-invalid @enderror" id="role_{{$user->id}}"
-                                    name="role">
-                                <option value="" selected disabled>- {{ __t('select_role') }} -</option>
-
-                                @foreach($roles as $key => $value)
-                                    <option value="{{ $key }}" {{ $user->role_id == $key ? 'selected' : '' }}> {{ $value }}</option>
-                                @endforeach
-
-                            </select>
-
-                            @error('role')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <label for="images_{{$user->id}}"
-                               class="col-md-2 col-form-label text-md-right">{{ __t('images') }}</label>
-
-                        <div class="col-md-9">
-                            <input type="file" id="images_{{$user->id}}" name="user_image" data-plugins="dropify"
-                                   data-default-file="{{ optional($user->profilePicture)->full_url ?: asset('assets/images/brands/dropbox.png') }}"/>
+                            <textarea name="address" class="form-control" id="address_{{$user->id}}">{{ $user->address }}</textarea>
                         </div>
                     </div>
 
