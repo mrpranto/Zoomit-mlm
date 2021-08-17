@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+//        Artisan::call('migrate');
 //        Artisan::call('db:seed --class=PermissionTableSeeder');
     }
 }

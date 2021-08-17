@@ -135,6 +135,11 @@ class PermissionTableSeeder extends Seeder
                 'name' => 'Withdraw List',
                 'slug' => 'app.withdraw.index'
             ],
+            [
+                'module_id' => $this->module('Wallet'),
+                'name' => 'Withdraw Create',
+                'slug' => 'app.withdraw.create'
+            ],
 
 
         ];

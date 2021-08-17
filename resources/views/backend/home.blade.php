@@ -23,25 +23,25 @@
 
     <div class="row">
 
-        @can('app.user.index')
-            <div class="col-12 col-sm-12 col-md-3 col-xl-3">
-                <div class="widget-rounded-circle card-box">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="avatar-lg rounded-circle bg-soft-success border-success border">
-                                <i class="fe-user-check font-22 avatar-title text-success"></i>
-                            </div>
+
+        <div class="col-12 col-sm-12 col-md-3 col-xl-3">
+            <div class="widget-rounded-circle card-box">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                            <i class="fe-user-check font-22 avatar-title text-success"></i>
                         </div>
-                        <div class="col-6">
-                            <div class="text-right">
-                                <h3 class="mt-1"><span data-plugin="counterup">{{ $users }}</span></h3>
-                                <p class="text-muted mb-1 text-truncate">Total Member</p>
-                            </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+                            <h3 class="mt-1"><span data-plugin="counterup">{{ $users }}</span></h3>
+                            <p class="text-muted mb-1 text-truncate">Total Member</p>
                         </div>
                     </div>
                 </div>
             </div>
-        @endcan
+        </div>
+
 
         <div class="col-12 col-sm-12 col-md-3 col-xl-3">
             <div class="widget-rounded-circle card-box">
@@ -168,6 +168,27 @@
                 </div>
             </div>
         </div>
+
+        @if(auth()->user()->role->slug == 'admin')
+            <div class="col-12 col-sm-12 col-md-3 col-xl-3">
+                <div class="widget-rounded-circle card-box">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <p>Level 1 = {{ $level_one->count() }}</p>
+                            <p>Level 2 = {{ $level_two->count() }}</p>
+                            <p>Level 3 = {{ $level_three->count() }}</p>
+                            <p>Level 4 = {{ $level_four->count() }}</p>
+                            <p>Level 5 = {{ $level_five->count() }}</p>
+                            <p>Level 6 = {{ $level_six->count() }}</p>
+                            <p>Level 7 = {{ $level_seven->count() }}</p>
+                            <p>Level 8 = {{ $level_eight->count() }}</p>
+                            <p>Level 9 = {{ $level_nine->count() }}</p>
+                            <p>Level 10 = {{ $level_ten->count() }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
 
     </div>
 

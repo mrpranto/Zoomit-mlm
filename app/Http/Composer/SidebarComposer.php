@@ -42,7 +42,7 @@ class SidebarComposer
                     'name' => 'Withdraw',
                     'icon' => 'fe-upload',
                     'id' => 'withdraw_sub_menu',
-                    'permission' => auth()->user()->canany(['app.withdraw.index']),
+                    'permission' => auth()->user()->canany(['app.withdraw.index', 'app.withdraw.create']),
                     'subMenu' => $this->subMenu->withdraw()
                 ],
                 [

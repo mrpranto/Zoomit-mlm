@@ -12,12 +12,12 @@ class SubMenuComposer
             [
                 'name' => 'Withdraw Amount',
                 'url' => route('withdraw.create'),
-                'permission' => auth()->user()->can('app.user.index')
+                'permission' => auth()->user()->can('app.withdraw.create')
             ],
             [
                 'name' => 'Withdraw History',
                 'url' => route('withdraw'),
-                'permission' => auth()->user()->can('app.user.index')
+                'permission' => auth()->user()->can('app.withdraw.index')
             ],
         ];
     }
